@@ -5,7 +5,7 @@
  * Description:       Block for displaying meta fields on the block editor.
  * Requires at least: 6.0
  * Requires PHP:      8.1
- * Version:           0.1.0
+ * Version:           0.1
  * Author:            André Amorim
  * Author URI:        https://andreamorim.site
  * Text Domain:       afca-meta-field-block

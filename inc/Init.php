@@ -23,7 +23,7 @@ class Init {
 		$update_class = new Updates( 'https://andreamorim.site/', basename( $this->plugin_path ), $plugin_data['Version'] );
 
 		// Schedule task for checking updates
-		add_action( 'afca_meta_feld_block_updates', [ $update_class, 'check_for_updates_on_hub' ] );
+		add_action( 'afca_meta_field_block_updates', [ $update_class, 'check_for_updates_on_hub' ] );
 		if ( ! wp_next_scheduled( 'afca_meta_field_block_updates' ) ) {
 			wp_schedule_event( current_time( 'timestamp' ), 'daily', 'afca_meta_field_block_updates' );
 		}
