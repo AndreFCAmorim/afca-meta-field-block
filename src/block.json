@@ -1,0 +1,18 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "afca-blocks/meta-field",
+	"version": "0.0.1",
+	"title": "Meta Field Block",
+	"category": "theme",
+	"icon": "admin-links",
+	"description": "Display a meta field from a post.",
+	"supports": {
+		"html": false
+	},
+	"textdomain": "afca-meta-field-block",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js"
+}
