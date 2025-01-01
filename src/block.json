@@ -10,6 +10,32 @@
 	"supports": {
 		"html": false
 	},
+	"attributes": {
+		"metaFieldName": {
+			"type": "string",
+			"default": ""
+		},
+		"renderType": {
+			"type": "string",
+			"default": ""
+		},
+		"showTextAdjacency": {
+			"type": "boolean",
+			"default": false
+		},
+		"beforeText": {
+			"type": "string",
+			"default": ""
+		},
+		"afterText": {
+			"type": "string",
+			"default": ""
+		},
+		"altText": {
+			"type": "string",
+			"default": ""
+		}
+	},
 	"textdomain": "afca-meta-field-block",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
