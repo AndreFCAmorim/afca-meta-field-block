@@ -34,6 +34,7 @@ class Init {
 
 		add_action( 'enqueue_block_editor_assets', [ $this, 'inject_nonce_for_block_editor' ] );
 
+		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_assets' ] );
 	}
 
 	public function register_block() {
@@ -69,4 +70,14 @@ class Init {
 		wp_add_inline_script( 'wp-block-editor', $nonce_js, 'before' );
 	}
 
+	// Assuming this is in your plugin or theme's render.php or functions.php
+
+	public function enqueue_assets() {
+		// Enqueue frontend styles
+		wp_enqueue_style(
+			'wp-block-afca-meta-field',
+			$this->plugin_path . 'build/style-index.css',
+			[],
+		);
+	}
 }

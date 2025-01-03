@@ -1,3 +1,11 @@
-.wp-block-afca-blocks-meta-field {
+.afca-blocks-meta-field {
 	display: flex;
+
+	.before-text {
+		margin-right: 4px;
+	}
+
+	.after-text {
+		margin-left: 4px;
+	}
 }
