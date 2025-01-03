@@ -29,6 +29,11 @@ class Init {
 		}
 
 		$this->set_js_translations();
+
+		new Endpoints();
+
+		add_action( 'enqueue_block_editor_assets', [ $this, 'inject_nonce_for_block_editor' ] );
+
 	}
 
 	public function register_block() {
@@ -45,4 +50,23 @@ class Init {
 	private function set_js_translations() {
 		wp_set_script_translations( 'afca-meta-field-block-editor-script', 'afca-meta-field-block', $this->plugin_path . '/languages' );
 	}
+
+	/**
+	 * Injects a nonce for the block editor
+	 */
+	public function inject_nonce_for_block_editor() {
+		// Inline script with the nonce
+		$nonce_js = sprintf(
+			'window.AfcaMetaFieldBlockSettings = %s;',
+			json_encode(
+				[
+					'nonce' => wp_create_nonce( 'wp_rest' ),
+				]
+			)
+		);
+
+		// Inject the script before Gutenberg's block scripts
+		wp_add_inline_script( 'wp-block-editor', $nonce_js, 'before' );
+	}
+
 }
