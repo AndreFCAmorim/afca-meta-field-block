@@ -1,30 +1,130 @@
-import { __ } from "@wordpress/i18n";
-
-import { InspectorControls, PanelColorSettings } from "@wordpress/block-editor";
-
+import { __ } from '@wordpress/i18n';
+import { InspectorControls } from '@wordpress/block-editor';
 import {
-  PanelBody,
-  PanelRow,
-  __experimentalInputControl as InputControl,
-} from "@wordpress/components";
+	PanelBody,
+	__experimentalInputControl as InputControl,
+	ToggleControl,
+	SelectControl,
+} from '@wordpress/components';
 
-export default function Controls(props) {
-  const { metaFieldName, renderType, beforeText, afterText, altText } =
-    props.attributes;
+export default function Controls( props ) {
+	const {
+		metaKey,
+		renderType,
+		showTextAdjacency,
+		beforeText,
+		afterText,
+		altText,
+		openLinkNewTab
+	} = props.attributes;
 
-  const handleMetaFieldNameChange = (value) => {
-    props.setAttributes({ metaFieldName: value });
-  };
+	const handleMetaKeyChange = ( value ) => {
+		props.setAttributes( { metaKey: value } );
+	};
 
-  return (
-    <InspectorControls>
-      <PanelBody>
-        <InputControl
-          label={__("Meta field name", "afca-meta-field-block")}
-          value={metaFieldName}
-          onChange={handleMetaFieldNameChange}
-        />
-      </PanelBody>
-    </InspectorControls>
-  );
+	const handleRenderTypeChange = ( value ) => {
+		props.setAttributes( { renderType: value } );
+	};
+
+	const handleMetaShowTextAdjacencyChange = ( value ) => {
+		props.setAttributes( { showTextAdjacency: value } );
+	};
+	const handleBeforeTextChange = ( value ) => {
+		props.setAttributes( { beforeText: value } );
+	};
+
+	const handleAltTextChange = ( value ) => {
+		props.setAttributes( { altText: value } );
+	};
+
+	const handleAfterTextChange = ( value ) => {
+		props.setAttributes( { afterText: value } );
+	};
+
+	const handleOpenLinkNewTabChange = ( value ) => {
+		props.setAttributes( { openLinkNewTab: value } );
+	};
+
+	return (
+		<InspectorControls>
+			<PanelBody>
+				<InputControl
+					label={ __( 'Meta key', 'afca-meta-field-block' ) }
+					value={ metaKey }
+					onChange={ handleMetaKeyChange }
+				/>
+				<ToggleControl
+					checked={ showTextAdjacency }
+					label={ __(
+						'Show text adjacency?',
+						'afca-meta-field-block'
+					) }
+					onChange={ handleMetaShowTextAdjacencyChange }
+				/>
+				{ showTextAdjacency && (
+					<>
+						<InputControl
+							label={ __(
+								'Text before meta value',
+								'afca-meta-field-block'
+							) }
+							value={ beforeText }
+							onChange={ handleBeforeTextChange }
+						/>
+						<InputControl
+							label={ __(
+								'Alternative text for meta value',
+								'afca-meta-field-block'
+							) }
+							value={ altText }
+							onChange={ handleAltTextChange }
+						/>
+						<InputControl
+							label={ __(
+								'Text after meta value',
+								'afca-meta-field-block'
+							) }
+							value={ afterText }
+							onChange={ handleAfterTextChange }
+						/>
+					</>
+				) }
+				<SelectControl
+					label={ __( 'Render option', 'afca-meta-field-block' ) }
+					value={ renderType }
+					options={ [
+						{
+							label: __( 'Text', 'afca-meta-field-block' ),
+							value: 'text',
+						},
+						{
+							label: __( 'URL', 'afca-meta-field-block' ),
+							value: 'url',
+						},
+						{
+							label: __( 'Image', 'afca-meta-field-block' ),
+							value: 'img',
+						},
+						{
+							label: __( 'List', 'afca-meta-field-block' ),
+							value: 'list',
+						},
+					] }
+					onChange={ handleRenderTypeChange }
+				/>
+				{
+					renderType == 'url' && (
+						<ToggleControl
+							checked={ openLinkNewTab }
+							label={ __(
+								'Open link in new tab',
+								'afca-meta-field-block'
+							) }
+							onChange={ handleOpenLinkNewTabChange }
+						/>
+					)
+				}
+			</PanelBody>
+		</InspectorControls>
+	);
 }

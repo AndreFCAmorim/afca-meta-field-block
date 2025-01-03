@@ -26,24 +26,95 @@ __webpack_require__.r(__webpack_exports__);
 
 function Controls(props) {
   const {
-    metaFieldName,
+    metaKey,
     renderType,
+    showTextAdjacency,
     beforeText,
     afterText,
-    altText
+    altText,
+    openLinkNewTab
   } = props.attributes;
-  const handleMetaFieldNameChange = value => {
+  const handleMetaKeyChange = value => {
     props.setAttributes({
-      metaFieldName: value
+      metaKey: value
+    });
+  };
+  const handleRenderTypeChange = value => {
+    props.setAttributes({
+      renderType: value
+    });
+  };
+  const handleMetaShowTextAdjacencyChange = value => {
+    props.setAttributes({
+      showTextAdjacency: value
+    });
+  };
+  const handleBeforeTextChange = value => {
+    props.setAttributes({
+      beforeText: value
+    });
+  };
+  const handleAltTextChange = value => {
+    props.setAttributes({
+      altText: value
+    });
+  };
+  const handleAfterTextChange = value => {
+    props.setAttributes({
+      afterText: value
+    });
+  };
+  const handleOpenLinkNewTabChange = value => {
+    props.setAttributes({
+      openLinkNewTab: value
     });
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Meta field name", "afca-meta-field-block"),
-        value: metaFieldName,
-        onChange: handleMetaFieldNameChange
-      })
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Meta key', 'afca-meta-field-block'),
+        value: metaKey,
+        onChange: handleMetaKeyChange
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+        checked: showTextAdjacency,
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Show text adjacency?', 'afca-meta-field-block'),
+        onChange: handleMetaShowTextAdjacencyChange
+      }), showTextAdjacency && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Text before meta value', 'afca-meta-field-block'),
+          value: beforeText,
+          onChange: handleBeforeTextChange
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Alternative text for meta value', 'afca-meta-field-block'),
+          value: altText,
+          onChange: handleAltTextChange
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Text after meta value', 'afca-meta-field-block'),
+          value: afterText,
+          onChange: handleAfterTextChange
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Render option', 'afca-meta-field-block'),
+        value: renderType,
+        options: [{
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Text', 'afca-meta-field-block'),
+          value: 'text'
+        }, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('URL', 'afca-meta-field-block'),
+          value: 'url'
+        }, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Image', 'afca-meta-field-block'),
+          value: 'img'
+        }, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('List', 'afca-meta-field-block'),
+          value: 'list'
+        }],
+        onChange: handleRenderTypeChange
+      }), renderType == 'url' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+        checked: openLinkNewTab,
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Open link in new tab', 'afca-meta-field-block'),
+        onChange: handleOpenLinkNewTabChange
+      })]
     })
   });
 }
@@ -64,36 +135,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./editor.scss */ "./src/editor.scss");
-/* harmony import */ var _controls_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./controls.js */ "./src/controls.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__);
-/**
- * Retrieves the translation of text.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-i18n/
- */
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./editor.scss */ "./src/editor.scss");
+/* harmony import */ var _controls_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./controls.js */ "./src/controls.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__);
 
 
-/**
- * React hook that is used to mark the block wrapper element.
- * It provides all the necessary props like the class name.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
- */
 
 
-/**
- * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
- * Those files can contain any CSS code that gets applied to the editor.
- *
- * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
- */
-
-
-/**
- * Internal dependencies
- */
 
 
 /**
@@ -107,15 +158,71 @@ __webpack_require__.r(__webpack_exports__);
 
 function Edit(props) {
   const {
-    attributes,
-    setAttributes
-  } = props;
+    metaKey,
+    renderType,
+    showTextAdjacency,
+    beforeText,
+    afterText,
+    altText,
+    openLinkNewTab
+  } = props.attributes;
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)();
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+  const metaValue = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_2__.useSelect)(select => {
+    var _post$acf$metaKey, _post$scf$metaKey, _post$metaKey;
+    const post = select('core').getEntityRecord('postType', props.context.query.postType, props.context.postId);
+    const acfField = (_post$acf$metaKey = post?.acf?.[metaKey]) !== null && _post$acf$metaKey !== void 0 ? _post$acf$metaKey : null;
+    if (acfField != null) {
+      return acfField;
+    }
+    const scfField = (_post$scf$metaKey = post?.scf?.[metaKey]) !== null && _post$scf$metaKey !== void 0 ? _post$scf$metaKey : null;
+    if (scfField != null) {
+      return scfField;
+    }
+    const podsField = (_post$metaKey = post?.[metaKey]) !== null && _post$metaKey !== void 0 ? _post$metaKey : null;
+    console.log("podsField: ", podsField);
+    if (podsField != null) {
+      return podsField;
+    }
+    console.log("post: ", post);
+    return post && post.meta && post.meta[metaKey];
+  }, [props.context.postId, props.context.query.postType, metaKey]);
+  const RenderedMetaValue = () => {
+    if (metaValue) {
+      switch (renderType) {
+        case 'text':
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
+            children: metaValue.toString()
+          });
+        case 'url':
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("a", {
+            href: metaValue,
+            target: openLinkNewTab ? '_blank' : '',
+            children: metaValue
+          });
+        case 'img':
+          break;
+        case 'list':
+          break;
+        default:
+          break;
+      }
+    } else {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
+        children: altText
+      });
+    }
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
     ...blockProps,
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_controls_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_js__WEBPACK_IMPORTED_MODULE_4__["default"], {
       ...props
-    }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Afca Meta Block – hello from the editor!", "afca-meta-block")]
+    }), showTextAdjacency && beforeText && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("p", {
+      className: "before-text",
+      children: [beforeText, " "]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(RenderedMetaValue, {}), showTextAdjacency && afterText && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("p", {
+      className: "after-text",
+      children: [" ", afterText]
+    })]
   });
 }
 
@@ -134,25 +241,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./edit */ "./src/edit.js");
 /* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./save */ "./src/save.js");
 /* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./block.json */ "./src/block.json");
-/**
- * Registers a new block provided a unique name and an object defining its behavior.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
- */
 
 
-/**
- * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
- * All files containing `style` keyword are bundled together. The code used
- * gets applied both to the front of your site and to the editor.
- *
- * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
- */
-
-
-/**
- * Internal dependencies
- */
 
 
 
@@ -189,23 +279,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__);
-/**
- * React hook that is used to mark the block wrapper element.
- * It provides all the necessary props like the class name.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
- */
 
-
-/**
- * The save function defines the way in which the different attributes should
- * be combined into the final markup, which is then serialized by the block
- * editor into `post_content`.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/#save
- *
- * @return {Element} Element to render.
- */
 
 function save() {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
@@ -280,6 +354,16 @@ module.exports = window["wp"]["components"];
 
 /***/ }),
 
+/***/ "@wordpress/data":
+/*!******************************!*\
+  !*** external ["wp","data"] ***!
+  \******************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["data"];
+
+/***/ }),
+
 /***/ "@wordpress/i18n":
 /*!******************************!*\
   !*** external ["wp","i18n"] ***!
@@ -296,7 +380,7 @@ module.exports = window["wp"]["i18n"];
   \************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"afca-blocks/meta-field","version":"0.1","title":"Meta Field Block","category":"theme","icon":"admin-links","description":"Display a meta field from a post.","supports":{"html":false},"attributes":{"metaFieldName":{"type":"string","default":""},"renderType":{"type":"string","default":""},"beforeText":{"type":"string","default":""},"afterText":{"type":"string","default":""},"altText":{"type":"string","default":""}},"textdomain":"afca-meta-field-block","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"afca-blocks/meta-field","version":"0.1","title":"Meta Field Block","category":"theme","icon":"admin-links","description":"Display a meta field from a post.","supports":{"html":false},"attributes":{"metaKey":{"type":"string","default":""},"renderType":{"type":"string","default":""},"showTextAdjacency":{"type":"boolean","default":false},"beforeText":{"type":"string","default":""},"afterText":{"type":"string","default":""},"altText":{"type":"string","default":""},"openLinkNewTab":{"type":"boolean","default":false}},"parent":["core/post-template"],"usesContext":["query","postId"],"textdomain":"afca-meta-field-block","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ })
 

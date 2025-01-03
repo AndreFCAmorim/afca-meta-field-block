@@ -11,13 +11,17 @@
     "html": false
   },
   "attributes": {
-    "metaFieldName": {
+    "metaKey": {
       "type": "string",
       "default": ""
     },
     "renderType": {
       "type": "string",
       "default": ""
+    },
+    "showTextAdjacency": {
+      "type": "boolean",
+      "default": false
     },
     "beforeText": {
       "type": "string",
@@ -30,8 +34,19 @@
     "altText": {
       "type": "string",
       "default": ""
+    },
+    "openLinkNewTab": {
+      "type": "boolean",
+      "default": false
     }
   },
+  "parent": [
+    "core/post-template"
+  ],
+  "usesContext": [
+    "query",
+    "postId"
+  ],
   "textdomain": "afca-meta-field-block",
   "editorScript": "file:./index.js",
   "editorStyle": "file:./index.css",

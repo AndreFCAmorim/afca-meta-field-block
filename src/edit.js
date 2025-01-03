@@ -1,30 +1,8 @@
-/**
- * Retrieves the translation of text.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-i18n/
- */
-import { __ } from "@wordpress/i18n";
-
-/**
- * React hook that is used to mark the block wrapper element.
- * It provides all the necessary props like the class name.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
- */
-import { useBlockProps } from "@wordpress/block-editor";
-
-/**
- * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
- * Those files can contain any CSS code that gets applied to the editor.
- *
- * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
- */
-import "./editor.scss";
-
-/**
- * Internal dependencies
- */
-import Controls from "./controls.js";
+import { __ } from '@wordpress/i18n';
+import { useBlockProps } from '@wordpress/block-editor';
+import { useSelect } from '@wordpress/data';
+import './editor.scss';
+import Controls from './controls.js';
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -34,13 +12,86 @@ import Controls from "./controls.js";
  *
  * @return {Element} Element to render.
  */
-export default function Edit(props) {
-	const { attributes, setAttributes } = props;
+export default function Edit( props ) {
+	const {
+		metaKey,
+		renderType,
+		showTextAdjacency,
+		beforeText,
+		afterText,
+		altText,
+		openLinkNewTab,
+	} = props.attributes;
+
 	const blockProps = useBlockProps();
+
+	const metaValue = useSelect(
+		( select ) => {
+			const post = select( 'core' ).getEntityRecord(
+				'postType',
+				props.context.query.postType,
+				props.context.postId
+			);
+
+			const acfField = post?.acf?.[metaKey] ?? null;
+			if ( acfField != null ) {
+				return acfField;
+			}
+
+			const scfField = post?.scf?.[metaKey] ?? null;
+			if ( scfField != null) {
+				return scfField;
+			}
+
+			const podsField = post?.[metaKey] ?? null;
+			console.log("podsField: ", podsField);
+			if (podsField != null) {
+			  return podsField;
+			}
+
+			console.log( "post: ", post );
+
+			return post && post.meta && post.meta[ metaKey ];
+		},
+		[ props.context.postId, props.context.query.postType, metaKey ]
+	);
+
+	const RenderedMetaValue = () => {
+		if ( metaValue ) {
+			switch ( renderType ) {
+				case 'text':
+					return <p>{ metaValue.toString() }</p>;
+				case 'url':
+					return (
+						<a
+							href={ metaValue }
+							target={ openLinkNewTab ? '_blank' : '' }
+						>
+							{ metaValue }
+						</a>
+					);
+				case 'img':
+					break;
+				case 'list':
+					break;
+				default:
+					break;
+			}
+		} else {
+			return <p>{ altText }</p>;
+		}
+	};
+
 	return (
-		<div {...blockProps}>
-			<Controls {...props} />
-			{__("Afca Meta Block – hello from the editor!", "afca-meta-block")}
+		<div { ...blockProps }>
+			<Controls { ...props } />
+			{ showTextAdjacency && beforeText && (
+				<p className="before-text">{ beforeText } </p>
+			) }
+			<RenderedMetaValue />
+			{ showTextAdjacency && afterText && (
+				<p className="after-text"> { afterText }</p>
+			) }
 		</div>
 	);
 }

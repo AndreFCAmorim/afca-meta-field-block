@@ -15,6 +15,7 @@
 		"start": "wp-scripts start"
 	},
 	"devDependencies": {
+		"@wordpress/prettier-config": "^4.14.0",
 		"@wordpress/scripts": "^30.7.0"
 	}
 }
