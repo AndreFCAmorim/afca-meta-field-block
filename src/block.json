@@ -17,7 +17,7 @@
 		},
 		"renderType": {
 			"type": "string",
-			"default": ""
+			"default": "text"
 		},
 		"showTextAdjacency": {
 			"type": "boolean",
