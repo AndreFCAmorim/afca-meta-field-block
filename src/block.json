@@ -40,7 +40,6 @@
 			"default": false
 		}
 	},
-	"parent": ["core/post-template"],
 	"usesContext": ["query", "postId"],
 	"textdomain": "afca-meta-field-block",
 	"editorScript": "file:./index.js",
