@@ -17,7 +17,7 @@
     },
     "renderType": {
       "type": "string",
-      "default": ""
+      "default": "text"
     },
     "showTextAdjacency": {
       "type": "boolean",
@@ -40,9 +40,6 @@
       "default": false
     }
   },
-  "parent": [
-    "core/post-template"
-  ],
   "usesContext": [
     "query",
     "postId"
@@ -51,5 +48,5 @@
   "editorScript": "file:./index.js",
   "editorStyle": "file:./index.css",
   "style": "file:./style-index.css",
-  "viewScript": "file:./view.js"
+  "render": "file:./render.php"
 }
