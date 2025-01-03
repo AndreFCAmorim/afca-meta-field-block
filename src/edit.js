@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps } from '@wordpress/block-editor';
-import { useSelect } from '@wordpress/data';
+import { useState, useCallback, useEffect } from '@wordpress/element';
 import './editor.scss';
 import Controls from './controls.js';
 
@@ -25,42 +25,41 @@ export default function Edit( props ) {
 
 	const blockProps = useBlockProps();
 
-	const metaValue = useSelect(
-		( select ) => {
-			const post = select( 'core' ).getEntityRecord(
-				'postType',
-				props.context.query.postType,
-				props.context.postId
+	const [ metaValue, setMetaValue ] = useState( '' );
+
+	const fetchData = useCallback( async () => {
+		try {
+			let response = await fetch(
+				`/wp-json/afca-meta-field-block/v1/get-meta-field?post_id=${ props.context.postId }&meta_key=${ metaKey }`,
+				{
+					method: 'GET',
+					headers: {
+						'X-WP-Nonce': AfcaMetaFieldBlockSettings.nonce,
+						'Content-Type': 'application/json',
+					},
+				}
 			);
 
-			const acfField = post?.acf?.[metaKey] ?? null;
-			if ( acfField != null ) {
-				return acfField;
+			if ( response == false ) {
+				return;
+			} else {
+				const result = await response.json();
+				setMetaValue( result.meta_key );
 			}
+		} catch ( error ) {
+			console.error( 'Error retrieving meta field:', error );
+		}
+	}, [] );
 
-			const scfField = post?.scf?.[metaKey] ?? null;
-			if ( scfField != null) {
-				return scfField;
-			}
-
-			const podsField = post?.[metaKey] ?? null;
-			console.log("podsField: ", podsField);
-			if (podsField != null) {
-			  return podsField;
-			}
-
-			console.log( "post: ", post );
-
-			return post && post.meta && post.meta[ metaKey ];
-		},
-		[ props.context.postId, props.context.query.postType, metaKey ]
-	);
+	useEffect( () => {
+		fetchData();
+	}, [ props.context.postId, metaKey ] );
 
 	const RenderedMetaValue = () => {
 		if ( metaValue ) {
 			switch ( renderType ) {
 				case 'text':
-					return <p>{ metaValue.toString() }</p>;
+					return <p>{ metaValue }</p>;
 				case 'url':
 					return (
 						<a
