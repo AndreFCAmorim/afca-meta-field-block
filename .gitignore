@@ -1,3 +1,21 @@
+# macOS-specific
 .DS_Store
+
+# IDE-specific
 .vscode
-node_modules
+.idea/
+
+# Composer dependencies
+vendor/
+!vendor/autoload.php
+!vendor/composer
+
+# Node.js dependencies
+node_modules/
+
+# Environment variables
+.env
+
+# Logs and temp files
+*.log
+tmp/
