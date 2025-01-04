@@ -53,8 +53,8 @@ echo wp_kses(
 		'div' => [ 'class' => [] ],
 		'p'   => [ 'class' => [] ],
 		'a'   => [
-			'href',
-			'target',
+			'href'   => [],
+			'target' => [],
 		],
 	]
 );
