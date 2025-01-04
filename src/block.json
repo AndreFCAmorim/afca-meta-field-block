@@ -38,6 +38,10 @@
 		"openLinkNewTab": {
 			"type": "boolean",
 			"default": false
+		},
+		"textLink": {
+			"default": "",
+			"type": "string"
 		}
 	},
 	"usesContext": ["query", "postId"],

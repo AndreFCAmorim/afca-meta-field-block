@@ -15,7 +15,8 @@ export default function Controls( props ) {
 		beforeText,
 		afterText,
 		altText,
-		openLinkNewTab
+		openLinkNewTab,
+		textLink,
 	} = props.attributes;
 
 	const handleMetaKeyChange = ( value ) => {
@@ -43,6 +44,10 @@ export default function Controls( props ) {
 
 	const handleOpenLinkNewTabChange = ( value ) => {
 		props.setAttributes( { openLinkNewTab: value } );
+	};
+
+	const handleTextLinkChange = ( value ) => {
+		props.setAttributes( { textLink: value } );
 	};
 
 	return (
@@ -112,8 +117,8 @@ export default function Controls( props ) {
 					] }
 					onChange={ handleRenderTypeChange }
 				/>
-				{
-					renderType == 'url' && (
+				{ renderType == 'url' && (
+					<>
 						<ToggleControl
 							checked={ openLinkNewTab }
 							label={ __(
@@ -122,8 +127,16 @@ export default function Controls( props ) {
 							) }
 							onChange={ handleOpenLinkNewTabChange }
 						/>
-					)
-				}
+						<InputControl
+							label={ __(
+								'Text for the link',
+								'afca-meta-field-block'
+							) }
+							value={ textLink }
+							onChange={ handleTextLinkChange }
+						/>
+					</>
+				) }
 			</PanelBody>
 		</InspectorControls>
 	);

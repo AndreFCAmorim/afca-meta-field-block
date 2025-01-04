@@ -6,6 +6,7 @@ $before_text         = $show_text_adjacency ? sprintf( '<p class="before-text">%
 $after_text          = $show_text_adjacency ? sprintf( '<p class="after-text">%1$s</p>', $attributes['afterText'] ) : '';
 $alt_text            = $attributes['altText'];
 $open_link_new_tab   = $attributes['openLinkNewTab'];
+$text_link           = $attributes['textLink'];
 
 $meta_value = null;
 if ( $meta_key ) {
@@ -27,9 +28,10 @@ if ( $meta_value ) {
 			break;
 		case 'url':
 			$html .= sprintf(
-				'<a href="%1$s" target="%2$s">%1$s</a>',
+				'<a href="%1$s" target="%2$s">%3$s</a>',
 				$meta_value,
-				( $open_link_new_tab ? '_blank' : '' )
+				( $open_link_new_tab ? '_blank' : '' ),
+				( empty( $text_link ) ? $meta_value : $text_link )
 			);
 
 			break;

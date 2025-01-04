@@ -21,6 +21,7 @@ export default function Edit( props ) {
 		afterText,
 		altText,
 		openLinkNewTab,
+		textLink,
 	} = props.attributes;
 
 	const blockProps = useBlockProps();
@@ -66,7 +67,7 @@ export default function Edit( props ) {
 							href={ metaValue }
 							target={ openLinkNewTab ? '_blank' : '' }
 						>
-							{ metaValue }
+							{ textLink == '' ? metaValue : textLink }
 						</a>
 					);
 				case 'img':
