@@ -6,6 +6,7 @@ class Init {
 
 	private string $plugin_path;
 	private string $plugin_url;
+	private string $plugin_version;
 
 	public function __construct( $plugin_dir_path, $plugin_dir_url ) {
 		$this->plugin_path = plugin_dir_path( __DIR__ );
@@ -19,8 +20,9 @@ class Init {
 			require_once ABSPATH . 'wp-admin/includes/plugin.php';
 		}
 
-		$plugin_data  = get_plugin_data( $this->plugin_path . 'afca-meta-field-block.php' );
-		$update_class = new Updates( 'https://andreamorim.site/', basename( $this->plugin_path ), $plugin_data['Version'] );
+		$plugin_data          = get_plugin_data( $this->plugin_path . 'afca-meta-field-block.php' );
+		$this->plugin_version = $plugin_data['Version'];
+		$update_class         = new Updates( 'https://andreamorim.site/', basename( $this->plugin_path ), $this->plugin_version );
 
 		// Schedule task for checking updates
 		add_action( 'afca_meta_field_block_updates', [ $update_class, 'check_for_updates_on_hub' ] );
@@ -78,6 +80,7 @@ class Init {
 			'wp-block-afca-meta-field',
 			$this->plugin_path . 'build/style-index.css',
 			[],
+			$this->plugin_version
 		);
 	}
 }
