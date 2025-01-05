@@ -38,6 +38,14 @@
     "openLinkNewTab": {
       "type": "boolean",
       "default": false
+    },
+    "textLink": {
+      "default": "",
+      "type": "string"
+    },
+    "imgAltText": {
+      "default": "",
+      "type": "string"
     }
   },
   "usesContext": [

@@ -32,7 +32,9 @@ function Controls(props) {
     beforeText,
     afterText,
     altText,
-    openLinkNewTab
+    openLinkNewTab,
+    textLink,
+    imgAltText
   } = props.attributes;
   const handleMetaKeyChange = value => {
     props.setAttributes({
@@ -67,6 +69,16 @@ function Controls(props) {
   const handleOpenLinkNewTabChange = value => {
     props.setAttributes({
       openLinkNewTab: value
+    });
+  };
+  const handleTextLinkChange = value => {
+    props.setAttributes({
+      textLink: value
+    });
+  };
+  const handleImgAltTextChange = value => {
+    props.setAttributes({
+      imgAltText: value
     });
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
@@ -110,10 +122,20 @@ function Controls(props) {
           value: 'list'
         }],
         onChange: handleRenderTypeChange
-      }), renderType == 'url' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-        checked: openLinkNewTab,
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Open link in new tab', 'afca-meta-field-block'),
-        onChange: handleOpenLinkNewTabChange
+      }), renderType == 'url' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+          checked: openLinkNewTab,
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Open link in new tab', 'afca-meta-field-block'),
+          onChange: handleOpenLinkNewTabChange
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Text for the link', 'afca-meta-field-block'),
+          value: textLink,
+          onChange: handleTextLinkChange
+        })]
+      }), renderType == 'img' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalInputControl, {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Alternative text for image', 'afca-meta-field-block'),
+        value: imgAltText,
+        onChange: handleImgAltTextChange
       })]
     })
   });
@@ -164,7 +186,9 @@ function Edit(props) {
     beforeText,
     afterText,
     altText,
-    openLinkNewTab
+    openLinkNewTab,
+    textLink,
+    imgAltText
   } = props.attributes;
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)();
   const [metaValue, setMetaValue] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useState)('');
@@ -191,7 +215,7 @@ function Edit(props) {
     fetchData();
   }, [props.context.postId, metaKey]);
   const RenderedMetaValue = () => {
-    if (metaValue) {
+    if (metaValue && typeof metaValue != 'object') {
       switch (renderType) {
         case 'text':
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
@@ -201,18 +225,28 @@ function Edit(props) {
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("a", {
             href: metaValue,
             target: openLinkNewTab ? '_blank' : '',
-            children: metaValue
+            children: textLink == '' ? metaValue : textLink
           });
         case 'img':
-          break;
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
+            children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Image will be displayed in the frontend', 'afca-meta-field-block')
+          });
         case 'list':
-          break;
-        default:
-          break;
+          if (Array.isArray(metaValue)) {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("ul", {
+              children: metaValue.map((item, index) => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("li", {
+                children: item
+              }, index))
+            });
+          } else {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
+              children: metaValue
+            });
+          }
       }
     } else {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
-        children: altText
+        children: altText != '' ? altText : '-'
       });
     }
   };
@@ -375,7 +409,7 @@ module.exports = window["wp"]["i18n"];
   \************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"afca-blocks/meta-field","version":"0.1","title":"Meta Field Block","category":"theme","icon":"admin-links","description":"Display a meta field from a post.","supports":{"html":false},"attributes":{"metaKey":{"type":"string","default":""},"renderType":{"type":"string","default":"text"},"showTextAdjacency":{"type":"boolean","default":false},"beforeText":{"type":"string","default":""},"afterText":{"type":"string","default":""},"altText":{"type":"string","default":""},"openLinkNewTab":{"type":"boolean","default":false}},"usesContext":["query","postId"],"textdomain":"afca-meta-field-block","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"afca-blocks/meta-field","version":"0.1","title":"Meta Field Block","category":"theme","icon":"admin-links","description":"Display a meta field from a post.","supports":{"html":false},"attributes":{"metaKey":{"type":"string","default":""},"renderType":{"type":"string","default":"text"},"showTextAdjacency":{"type":"boolean","default":false},"beforeText":{"type":"string","default":""},"afterText":{"type":"string","default":""},"altText":{"type":"string","default":""},"openLinkNewTab":{"type":"boolean","default":false},"textLink":{"default":"","type":"string"},"imgAltText":{"default":"","type":"string"}},"usesContext":["query","postId"],"textdomain":"afca-meta-field-block","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php"}');
 
 /***/ })
 
