@@ -21,7 +21,7 @@ export default function Edit( props ) {
 		afterText,
 		altText,
 		openLinkNewTab,
-		textLink,
+		textLink
 	} = props.attributes;
 
 	const blockProps = useBlockProps();
@@ -57,7 +57,7 @@ export default function Edit( props ) {
 	}, [ props.context.postId, metaKey ] );
 
 	const RenderedMetaValue = () => {
-		if ( metaValue ) {
+		if ( metaValue && typeof metaValue != 'object' ) {
 			switch ( renderType ) {
 				case 'text':
 					return <p>{ metaValue }</p>;
@@ -71,14 +71,29 @@ export default function Edit( props ) {
 						</a>
 					);
 				case 'img':
-					break;
+					return (
+						<p>
+							{ __(
+								'Image will be displayed in the frontend',
+								'afca-meta-field-block'
+							) }
+						</p>
+					);
 				case 'list':
-					break;
-				default:
-					break;
+					if ( Array.isArray( metaValue ) ) {
+						return (
+							<ul>
+								{ metaValue.map( ( item, index ) => (
+									<li key={ index }>{ item }</li>
+								) ) }
+							</ul>
+						);
+					} else {
+						return <p>{metaValue}</p>;
+					}
 			}
 		} else {
-			return <p>{ altText }</p>;
+			return <p>{ altText != '' ? altText : '-' }</p>;
 		}
 	};
 

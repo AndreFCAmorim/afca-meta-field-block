@@ -17,6 +17,7 @@ export default function Controls( props ) {
 		altText,
 		openLinkNewTab,
 		textLink,
+		imgAltText
 	} = props.attributes;
 
 	const handleMetaKeyChange = ( value ) => {
@@ -48,6 +49,10 @@ export default function Controls( props ) {
 
 	const handleTextLinkChange = ( value ) => {
 		props.setAttributes( { textLink: value } );
+	};
+
+	const handleImgAltTextChange = ( value ) => {
+		props.setAttributes( { imgAltText: value } );
 	};
 
 	return (
@@ -137,6 +142,18 @@ export default function Controls( props ) {
 						/>
 					</>
 				) }
+				{
+					renderType == 'img' && (
+						<InputControl
+							label={ __(
+								'Alternative text for image',
+								'afca-meta-field-block'
+							) }
+							value={ imgAltText }
+							onChange={ handleImgAltTextChange }
+						/>
+						)
+				}
 			</PanelBody>
 		</InspectorControls>
 	);

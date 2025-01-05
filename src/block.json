@@ -42,6 +42,10 @@
 		"textLink": {
 			"default": "",
 			"type": "string"
+		},
+		"imgAltText": {
+			"default": "",
+			"type": "string"
 		}
 	},
 	"usesContext": ["query", "postId"],

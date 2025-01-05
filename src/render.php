@@ -7,6 +7,7 @@ $after_text          = $show_text_adjacency ? sprintf( '<p class="after-text">%1
 $alt_text            = $attributes['altText'];
 $open_link_new_tab   = $attributes['openLinkNewTab'];
 $text_link           = $attributes['textLink'];
+$img_alt_text        = $attributes['imgAltText'];
 
 $meta_value = null;
 if ( $meta_key ) {
@@ -36,8 +37,37 @@ if ( $meta_value ) {
 
 			break;
 		case 'img':
+			$img_src = wp_http_validate_url( $meta_value ) ? $meta_value : wp_get_attachment_image_url( $meta_value, 'full' );
+			$html   .= sprintf(
+				'<img src="%1$s" alt="%2$s" />',
+				$img_src,
+				$img_alt_text
+			);
+
 			break;
 		case 'list':
+			if ( is_array( $meta_value ) ) {
+				$html .= sprintf(
+					'<ul>%1$s</ul>',
+					implode(
+						'',
+						array_map(
+							function ( $item ) {
+								return sprintf(
+									'<li>%1$s</li>',
+									$item
+								);
+							},
+							$meta_value
+						)
+					)
+				);
+			} else {
+				$html .= sprintf(
+					'<p>%1$s</p>',
+					$meta_value
+				);
+			}
 			break;
 		default:
 			break;
@@ -58,5 +88,11 @@ echo wp_kses(
 			'href'   => [],
 			'target' => [],
 		],
+		'img' => [
+			'src' => [],
+			'alt' => [],
+		],
+		'ul'  => [],
+		'li'  => [],
 	]
 );
