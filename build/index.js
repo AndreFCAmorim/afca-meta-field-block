@@ -181,75 +181,11 @@ __webpack_require__.r(__webpack_exports__);
 function Edit(props) {
   const {
     metaKey,
-    renderType,
     showTextAdjacency,
     beforeText,
-    afterText,
-    altText,
-    openLinkNewTab,
-    textLink,
-    imgAltText
+    afterText
   } = props.attributes;
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)();
-  const [metaValue, setMetaValue] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useState)('');
-  const fetchData = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useCallback)(async () => {
-    try {
-      let response = await fetch(`/wp-json/afca-meta-field-block/v1/get-meta-field?post_id=${props.context.postId}&meta_key=${metaKey}`, {
-        method: 'GET',
-        headers: {
-          'X-WP-Nonce': AfcaMetaFieldBlockSettings.nonce,
-          'Content-Type': 'application/json'
-        }
-      });
-      if (response == false) {
-        return;
-      } else {
-        const result = await response.json();
-        setMetaValue(result.meta_key);
-      }
-    } catch (error) {
-      console.error('Error retrieving meta field:', error);
-    }
-  }, []);
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useEffect)(() => {
-    fetchData();
-  }, [props.context.postId, metaKey]);
-  const RenderedMetaValue = () => {
-    if (metaValue && typeof metaValue != 'object') {
-      switch (renderType) {
-        case 'text':
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
-            children: metaValue
-          });
-        case 'url':
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("a", {
-            href: metaValue,
-            target: openLinkNewTab ? '_blank' : '',
-            children: textLink == '' ? metaValue : textLink
-          });
-        case 'img':
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
-            children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Image will be displayed in the frontend', 'afca-meta-field-block')
-          });
-        case 'list':
-          if (Array.isArray(metaValue)) {
-            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("ul", {
-              children: metaValue.map((item, index) => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("li", {
-                children: item
-              }, index))
-            });
-          } else {
-            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
-              children: metaValue
-            });
-          }
-      }
-    } else {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
-        children: altText != '' ? altText : '-'
-      });
-    }
-  };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
     ...blockProps,
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_controls_js__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -257,7 +193,9 @@ function Edit(props) {
     }), showTextAdjacency && beforeText && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("p", {
       className: "before-text",
       children: [beforeText, " "]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(RenderedMetaValue, {}), showTextAdjacency && afterText && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("p", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
+      children: metaKey
+    }), showTextAdjacency && afterText && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("p", {
       className: "after-text",
       children: [" ", afterText]
     })]

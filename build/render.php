@@ -38,7 +38,7 @@ if ( $meta_value ) {
 			break;
 		case 'img':
 			$img_src = wp_http_validate_url( $meta_value ) ? $meta_value : wp_get_attachment_image_url( $meta_value, 'full' );
-			$html .= sprintf(
+			$html   .= sprintf(
 				'<img src="%1$s" alt="%2$s" />',
 				$img_src,
 				$img_alt_text
@@ -92,5 +92,7 @@ echo wp_kses(
 			'src' => [],
 			'alt' => [],
 		],
+		'ul'  => [],
+		'li'  => [],
 	]
 );
